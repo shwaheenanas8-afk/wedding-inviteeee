@@ -294,13 +294,16 @@ body {
     transform: translate(30%, -40%);
   }
   
-  /* نص الضغط - مثالي */
+  /* نص الضغط - مثالي *//* 📱 للموبايل */
+@media (max-width: 768px) {
   .click-text {
-left: 240px;
-    top: 110px;
-    font-size: 15px;
-    padding: 10px 20px;
+    left: 50%;
+    top: 30%; /* عدل الرقم حسب مكان الختم */
+    transform: translateX(-50%);
+    text-align: center;
+    font-size: 14px;
   }
+}
   
   /* تحسين اللمس */
   .heptagon {
