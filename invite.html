@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Amiri&family=Lateef&display=swap" rel="stylesheet">
+
+<title>دعوة زفاف</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Cairo',sans-serif;}
+body{background-color: #ebf5bd;}
+
+/* LANG SELECT */
+.lang-select {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  z-index: 1000;
+  font-weight: bold;
+}
+.lang-select button{
+  cursor:pointer;
+  background:none;
+  border:none;
+  font-size:16px;
+  margin:0 3px;
+  color:#7c1414;
+}
+
+/* HERO */
+.hero {
+  width: 100%;
+  height: 100vh;
+  background: url('c2d891c8-60fc-49ed-b551-bdb9afa12127.png') center top no-repeat;
+  background-size: cover;
+  position: relative;
+  overflow: hidden;
+}
+
+/* overlay */
+.overlay{
+  position: absolute;
+  bottom: 80px; 
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  width: 100%;
+}
+
+/* اسماء العروسين */
+.names{
+  font-size:50px;
+  color:#8f0404;
+  margin-bottom:10px;
+  opacity:0;
+  animation:fadeInNames 1s forwards 0.5s;
+}
+@keyframes fadeInNames{to{opacity:1;}}
+
+/* التاريخ والكلمة الجانبية */
+.info-row{
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 80%;
+  margin: 10px auto 20px auto;
+  gap:20px;
+  opacity:0;
+  animation:fadeInInfo 1s forwards 0.7s;
+}
+.info-row .date{font-size:22px;color:#7c1414;}
+.info-row .subtitle{font-size:18px;color:#721717;}
+@keyframes fadeInInfo{to{opacity:1;}}
+
+/* كلمة "مرر للأسفل" والماوس */
+.scroll-down{
+  margin-top:20px;
+  color:#7e1b1b;
+  text-align:center;
+  cursor:pointer;
+}
+.mouse{
+  width:25px;
+  height:40px;
+  border:2px solid #722525;
+  border-radius:30px;
+  margin:auto;
+  position:relative;
+}
+.wheel{
+  width:4px;
+  height:8px;
+  background:#792929;
+  position:absolute;
+  top:6px;
+  left:50%;
+  transform:translateX(-50%);
+  border-radius:2px;
+  animation:scrollWheel 0.4s infinite;
+}
+@keyframes scrollWheel{0%{opacity:1; top:6px;}100%{opacity:0; top:20px;}}
+
+/* النصوص على الصورة */
+.text-on-hero{
+  text-align:center;
+  margin-top:10px;
+  opacity:0;
+  animation:fadeInText 1s forwards 1s;
+}
+.text-on-hero b{
+  display:block;
+  font-family:'Lateef', cursive;
+  font-size:24px;
+  color:#8f0404;
+  margin-bottom:10px;
+}
+@keyframes fadeInText{to{opacity:1;}}
+
+/* CARD */
+.card{
+  margin:20px;
+  padding:20px;
+  border-radius:20px;
+  text-align:center;
+  background:transparent;
+}
+.rings {
+  width: 120px;
+  height: 100px;
+  margin: 0 auto 20px;
+  position: relative;
+  filter: sepia(100) saturate(25) hue-rotate(10deg) brightness(1.2) contrast(1);
+}
+.rings::after {
+  content: "";
+  position: absolute;
+  top: 10%;
+  left: 15%;
+  width: 70%;
+  height: 40%;
+  background: linear-gradient(120deg, rgba(255,255,255,0.6), rgba(255,255,255,0));
+  border-radius: 50%;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+.time{font-size:20px;margin-bottom:5px;color:#7f8b46;}
+.place{font-size:16px;color:#7f8b46;}
+.note-children{
+  color:#8f0404; 
+  font-weight:bold; 
+  text-align:center; 
+  margin-top:10px; 
+  font-size:14px;
+}
+
+/* MAP */
+.map-title{margin-top:30px;color:#6f665d;}
+.map{margin-top:15px;border-radius:20px;overflow:hidden;position:relative;}
+.map iframe{width:100%;height:200px;border:0;border-radius:20px;}
+.map a{position:absolute;top:0;left:0;width:100%;height:100%;z-index:5;}
+
+/* COUNTDOWN */
+.countdown-section{
+  text-align:center;
+  margin:50px 20px;
+}
+.countdown-section .count-title{
+  color:#88060d;
+  font-weight:bold;
+  font-size:28px;
+}
+.countdown{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  font-size:16px;
+  color:#88060d;
+  flex-wrap:wrap;
+}
+.countdown div{
+  padding:10px;
+  border-radius:10px;
+  min-width:60px;
+  background:#fff;
+}
+.countdown div span{
+  font-family:'Times New Roman', Times, serif;
+  display:block;
+  font-size:24px;
+  font-weight:bold;
+}
+
+/* RSVP */
+.rsvp{
+  background-color:#FFFDD0;
+  padding:40px 20px;
+  text-align:center;
+}
+.rsvp h2{
+  font-family:'Amiri', serif;
+  font-size:32px;
+  color:#7f8b46;
+  margin-bottom:15px;
+}
+.rsvp h3{color:#7f8b46;}
+.rsvp form{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  max-width:300px;
+  margin:auto;
+}
+input{padding:12px;border:none;border-radius:8px;text-align:center;font-size:18px;}
+button{padding:12px;border-radius:8px;border:none;cursor:pointer;font-size:16px;}
+#btnNo{background:#8d0202;color:#faf7f7;}
+#btnYes{background:#7f8b46;color:#fff;}
+
+/* FOOTER */
+.footer{text-align:center;padding:30px 20px;}
+.footer-text{font-family:'Amiri', serif;font-size:18px;color:#5a5a5a;margin-bottom:15px;}
+.footer-names{font-family:'Playfair Display', serif;font-size:22px;color:#4a4a4a;letter-spacing:1px;}
+/* أضف هذا في قسم الـ style */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+#audioControls button:hover {
+  transform: scale(1.05);
+  transition: all 0.2s ease;
+}
+/* RESPONSIVE */
+/* RSVP - نفس الابتوب على الموبايل */
+@media (max-width: 768px) {
+  .rsvp {
+    background-color: #FFFDD0 !important;
+    padding: 40px 25px !important; /* نفس padding الابتوب */
+    margin: 0 20px !important; /* هوامش مثل الابتوب */
+    border-radius: 20px !important;
+  }
+  
+  .rsvp h2 {
+    font-family: 'Amiri', serif !important;
+    font-size: 28px !important; /* نفس حجم الابتوب تقريباً */
+    color: #7f8b46 !important;
+    margin-bottom: 15px !important;
+  }
+  
+  .rsvp h3 {
+    color: #7f8b46 !important;
+    font-size: 16px !important;
+  }
+  
+  .rsvp form {
+    max-width: 100% !important; /* ملء الشاشة */
+    gap: 15px !important;
+  }
+  
+  /* الاسم - نفس الابتوب */
+  #name {
+    padding: 15px !important;
+    font-size: 20px !important;
+    border-radius: 10px !important;
+    text-align: center !important;
+    width: 100% !important;
+  }
+  
+  /* عدد 2 - نفس الابتوب */
+  #guests {
+    padding: 15px !important;
+    font-size: 20px !important;
+    border-radius: 10px !important;
+    text-align: center !important;
+    background: #f0f8d8 !important;
+    color: #7f8b46 !important;
+  }
+  
+  /* الأزرار - نفس الابتوب بالضبط */
+  #btnNo, #btnYes {
+    padding: 16px 20px !important;
+    font-size: 18px !important;
+    border-radius: 10px !important;
+    flex: 1 !important;
+    height: auto !important;
+    white-space: normal !important; /* النص يتكسر طبيعي */
+    line-height: 1.3 !important;
+  }
+  
+  /* عرض الأزرار جنب بعض */
+  #btnNo, #btnYes {
+    min-height: 55px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+  /* تأكد من عرض الأزرار جنب بعض على الموبايل */
+@media (max-width: 768px) {
+  .rsvp form > div:last-child {
+    display: flex !important;
+    gap: 15px !important;
+    flex-direction: row !important; /* جنب بعض مش تحت بعض */
+  }
+}
+}
+</style>
+</head>
+<body>
+
+<!-- LANGUAGE SELECT -->
+<div class="lang-select">
+  <button onclick="setLanguage('ar')">AR</button> | 
+  <button onclick="setLanguage('en')">EN</button>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="overlay">
+    <h1 class="names lang-text" data-ar="فارس 🕊️ العنود" data-en="Fares 🕊️ Alnoud">فارس 🕊️ العنود</h1>
+    <div class="info-row">
+      <div class="date lang-text" data-ar="29 مايو, 2026" data-en="May 29, 2026">29 مايو, 2026</div>
+      <div class="subtitle lang-text" data-ar="انضموا الينا في يوم زفافنا" data-en="Join us on our wedding day">انضموا الينا في يوم زفافنا</div>
+    </div>
+    <div class="text-on-hero">
+      <b class="lang-text" data-ar="دعوة زفاف" data-en="Wedding Invitation">دعوة زفاف</b>
+      <b class="lang-text" data-ar="ندعوكم لمشاركتنا اجمل لحظات العمر" data-en="Join us to share the happiest moments">ندعوكم لمشاركتنا اجمل لحظات العمر</b>
+    </div>
+    <div class="scroll-down" onclick="scrollDown()">
+      <div class="mouse"><div class="wheel"></div></div>
+      <span class="lang-text" data-ar="مرر للأسفل" data-en="Scroll Down">مرر للأسفل</span>
+    </div>
+  </div>
+</div>
+
+<!-- CARD -->
+<div class="card">
+  <img src="rings (2).jpeg" class="rings">
+  <div class="time lang-text" data-ar="الجمعه 8:00 مساء" data-en="Friday 8:00 PM">الجمعه 8:00 مساء</div>
+  <div class="place lang-text" data-ar="Jasmine Hall" data-en="Jasmine Hall">Jasmine Hall</div>
+  <div class="note-children lang-text" data-ar="⚠️ ادارة المزرعه : منعاً للاحراج، يرجى عدم اصطحاب الاطفال" data-en="⚠️ Management: Please do not bring children">⚠️ ادارة المزرعه : منعاً للاحراج، يرجى عدم اصطحاب الاطفال</div>
+  <div class="map-title lang-text" data-ar="عرض الموقع" data-en="Location">عرض الموقع</div>
+  <div class="map">
+    <iframe src="https://www.google.com/maps?q=Jasmine+Hall+Airport+Road+Amman&output=embed"></iframe>
+    <a href="https://www.google.com/maps/dir/?api=1&destination=Jasmine+Hall+Airport+Road+Amman" target="_blank"></a>
+  </div>
+</div>
+
+<!-- COUNTDOWN -->
+<section class="countdown-section">
+  <div class="count-title lang-text" data-ar="العد التنازلي لفرحة العمر" data-en="Countdown to Our Wedding">العد التنازلي لفرحة العمر</div>
+  <div class="countdown">
+    <div><span id="days">0</span><span class="lang-text" data-ar="أيام" data-en="Days">أيام</span></div>
+    <div><span id="hours">0</span><span class="lang-text" data-ar="ساعات" data-en="Hours">ساعات</span></div>
+    <div><span id="minutes">0</span><span class="lang-text" data-ar="دقائق" data-en="Minutes">دقائق</span></div>
+    <div><span id="seconds">0</span><span class="lang-text" data-ar="ثواني" data-en="Seconds">ثواني</span></div>
+  </div>
+</section>
+
+<!-- RSVP -->
+<section class="rsvp">
+  <h2 class="lang-text" data-ar="تأكيد الحضور" data-en="RSVP">تأكيد الحضور</h2>
+  <h3 class="lang-text" data-ar="يرجى الرد قبل 26.5.2026" data-en="Please respond before 26.5.2026">يرجى الرد قبل 26.5.2026</h3>
+  <form id="rsvpForm">
+    <!-- حقل الاسم -->
+    <input type="text" id="name" placeholder="الاسم" class="lang-text" data-ar="الاسم" data-en="Name" required>
+
+    <!-- عدد الضيوف ثابت على 2 -->
+    <input type="text" id="guests" value="2" readonly>
+
+    <!-- أزرار RSVP -->
+    <div style="display:flex; gap:10px;">
+      <button type="button" id="btnNo" class="lang-text" data-ar="آسف/ة بعتذر عن الحضور 😔" data-en="Sorry, I cannot attend 😔">آسف/ة بعتذر عن الحضور 😔</button>
+      <button type="button" id="btnYes" class="lang-text" data-ar="أكيد راح أكون موجود/ة" data-en="Yes, I will attend">أكيد راح أكون موجود/ة</button>
+    </div>
+  </form>
+</section>
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="footer-text lang-text" data-ar="فرحتنا بتكمل معكم" data-en="Our happiness is complete with you">فرحتنا بتكمل معكم</div>
+  <div class="footer-names">2026 © فارس العنود</div>
+</div>
+<!-- استبدل audio tag الحالي بهذا -->
+<div id="audioControls" style="position:fixed; top:20px; left:20px; z-index:1001; background:rgba(0,0,0,0.7); padding:10px; border-radius:10px; display:none;">
+  <button id="playBtn" style="background:#7f8b46; color:white; border:none; padding:8px 12px; border-radius:5px; cursor:pointer; font-size:14px;">🔊 تشغيل الموسيقى</button>
+  <button id="muteBtn" style="background:#8d0202; color:white; border:none; padding:8px 12px; border-radius:5px; cursor:pointer; font-size:14px; display:none;">🔇 إيقاف</button>
+</div>
+<!-- احذف الـ audio القديم وضع هذا بداله -->
+<audio id="bgMusic" loop preload="auto" style="display:none;">
+  <source src="aACwqo8W_pU (1).mp3" type="audio/mpeg">
+</audio>
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script>
+  // ضع هذا في نهاية الـ script الموجود
+// تشغيل تلقائي للموسيقى عند تحميل الصفحة
+document.addEventListener('DOMContentLoaded', function() {
+  const bgMusic = document.getElementById('bgMusic');
+  
+  // ضبط الصوت (30%)
+  bgMusic.volume = 0.3;
+  
+  // تشغيل تلقائي مع حلول لكل المتصفحات
+  function playMusic() {
+    bgMusic.play().then(() => {
+      console.log('🎵 الموسيقى تشغلت تلقائياً');
+    }).catch(err => {
+      console.log('جاري المحاولة مرة أخرى...', err);
+      // إعادة المحاولة بعد 500ms
+      setTimeout(playMusic, 500);
+    });
+  }
+  
+  // تشغيل فوري
+  playMusic();
+  
+  // تشغيل عند أول تفاعل مع الصفحة (حل مضمون)
+  ['click', 'scroll', 'keydown', 'touchstart'].forEach(event => {
+    document.addEventListener(event, function handler() {
+      playMusic();
+      // إزالة المستمع بعد التشغيل
+      ['click', 'scroll', 'keydown', 'touchstart'].forEach(e => {
+        document.removeEventListener(e, handler);
+      });
+    }, { once: true });
+  });
+  
+  // إعادة تشغيل لو توقفت
+  bgMusic.addEventListener('pause', () => {
+    setTimeout(() => {
+      if (bgMusic.paused) playMusic();
+    }, 1000);
+  });
+});
+// SCROLL DOWN
+function scrollDown(){ window.scrollBy({top:window.innerHeight,behavior:'smooth'}); }
+// EmailJS init
+(function(){
+  emailjs.init("eXCYgQ6n7DPSCSzDU"); // حط المفتاح
+})();
+
+// RSVP
+const btnYes = document.getElementById("btnYes");
+const btnNo = document.getElementById("btnNo");
+const nameInput = document.getElementById("name");
+const guestsSelect = document.getElementById("guests");
+btnYes.addEventListener("click", ()=>{
+  if(!nameInput.value){ 
+    alert(nameInput.getAttribute('data-ar') + " مطلوب!"); 
+    return; 
+  }
+
+  const params = {
+    name: nameInput.value,
+    attendance: "حاضر",
+    guests: guestsSelect.value
+  };
+
+  emailjs.send("service_ddh3srl", "template_vxehk6h", params, "eXCYgQ6n7DPSCSzDU")
+  .then((res)=>{
+    console.log("SUCCESS:", res);
+    alert(`✅ تم تأكيد حضورك ❤️\n${nameInput.value}\nعدد الأشخاص: ${guestsSelect.value}`);
+  })
+  .catch((error)=>{
+    console.log("ERROR FULL:", error);
+    alert("❌ الخطأ: " + error.text);
+  });
+});
+
+btnNo.addEventListener("click", ()=>{
+  if(!nameInput.value){ 
+    alert(nameInput.getAttribute('data-ar') + " مطلوب!"); 
+    return; 
+  }
+
+  const params = {
+    name: nameInput.value,
+    attendance: "غير قادر على الحضور",
+    guests: guestsSelect.value
+  };
+
+  emailjs.send("service_ddh3srl", "template_vxehk6h", params, "eXCYgQ6n7DPSCSzDU")
+  .then((res)=>{
+    console.log("SUCCESS:", res);
+    alert(`❌ تم تسجيل الاعتذار 😔\n${nameInput.value}`);
+  })
+  .catch((error)=>{
+    console.log("ERROR FULL:", error);
+    alert("❌ الخطأ: " + error.text);
+  });
+});
+// COUNTDOWN
+const weddingDate = new Date("May 29, 2026 20:00:00").getTime();
+function updateCountdown(){
+  const now = new Date().getTime();
+  const diff = weddingDate - now;
+  const days = Math.floor(diff/(1000*60*60*24));
+  const hours = Math.floor((diff%(1000*60*60*24))/(1000*60*60));
+  const minutes = Math.floor((diff%(1000*60*60))/(1000*60));
+  const seconds = Math.floor((diff%(1000*60))/1000);
+  document.getElementById("days").innerText = days;
+  document.getElementById("hours").innerText = hours;
+  document.getElementById("minutes").innerText = minutes;
+  document.getElementById("seconds").innerText = seconds;
+}
+setInterval(updateCountdown,1000);
+updateCountdown();
+
+// LANGUAGE SWITCH
+function setLanguage(lang){
+  const texts = document.querySelectorAll('.lang-text');
+  texts.forEach(el=>{
+    el.innerText = el.getAttribute(`data-${lang}`);
+  });
+  // نظام الصوت المتقدم للموبايل
+document.addEventListener('DOMContentLoaded', function() {
+  const bgMusic = document.getElementById('bgMusic');
+  const musicIndicator = document.getElementById('musicIndicator');
+  
+  // كشف الموبايل
+  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  
+  if (!isMobile) return; // الصوت للموبايل فقط
+  
+  // إعدادات الصوت
+  bgMusic.volume = 0.25; // صوت هادئ
+  bgMusic.muted = false;
+  
+  // دالة التشغيل المتقدمة
+  function playMusicSafely() {
+    const playPromise = bgMusic.play();
+    
+    if (playPromise !== undefined) {
+      playPromise.then(() => {
+        musicIndicator.style.display = 'block';
+        console.log('✅ الصوت يعمل على الموبايل');
+      }).catch(error => {
+        console.log('🔄 جاري المحاولة...', error);
+        // إعادة المحاولة
+        setTimeout(playMusicSafely, 800);
+      });
+    }
+  }
+  
+  // تشغيل تلقائي فوري
+  playMusicSafely();
+  
+  // تشغيل مضمون عند أول لمس
+  let touchHandled = false;
+  ['touchstart', 'click', 'scroll'].forEach(event => {
+    document.addEventListener(event, function handler(e) {
+      if (!touchHandled) {
+        playMusicSafely();
+        touchHandled = true;
+      }
+      // إزالة المستمعين بعد التشغيل
+      ['touchstart', 'click', 'scroll'].forEach(ev => {
+        document.removeEventListener(ev, handler);
+      });
+    }, { once: true, passive: true });
+  });
+  
+  // إعادة تشغيل لو توقف
+  bgMusic.addEventListener('pause', () => {
+    if (document.visibilityState === 'visible') {
+      setTimeout(playMusicSafely, 1500);
+    }
+  });
+  
+  // إيقاف عند مغادرة الصفحة
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'hidden') {
+      bgMusic.pause();
+    } else {
+      playMusicSafely();
+    }
+  });
+});
+}
+</script>
+
+</body>
+</html>
