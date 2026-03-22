@@ -8,7 +8,7 @@
 <title>دعوة زفاف</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Cairo',sans-serif;}
-body{background-color: #ebf5bd;}
+body{background-color: #f0edc8}
 
 /* LANG SELECT */
 .lang-select {
@@ -49,7 +49,7 @@ body{background-color: #ebf5bd;}
 
 /* اسماء العروسين */
 .names{
-  font-size:50px;
+  font-size:40px;
   color:#8f0404;
   margin-bottom:10px;
   opacity:0;
@@ -58,16 +58,30 @@ body{background-color: #ebf5bd;}
 @keyframes fadeInNames{to{opacity:1;}}
 
 /* التاريخ والكلمة الجانبية */
-.info-row{
+.info-row .date{
+ 
   display:flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   width: 80%;
   margin: 10px auto 20px auto;
+  gap:2px;
+  opacity:0;
+  animation:fadeInInfo 1s forwards 0.7s;
+}.info-row .subtitle{
+
+  display:flex;
+  justify-content:center;
+  align-items: center;
+  width: 80%;
+  margin: 10px auto 20px auto;
+  
   gap:20px;
   opacity:0;
   animation:fadeInInfo 1s forwards 0.7s;
+  
 }
+
 .info-row .date{font-size:22px;color:#7c1414;}
 .info-row .subtitle{font-size:18px;color:#721717;}
 @keyframes fadeInInfo{to{opacity:1;}}
@@ -93,6 +107,7 @@ body{background-color: #ebf5bd;}
   background:#792929;
   position:absolute;
   top:6px;
+  
   left:50%;
   transform:translateX(-50%);
   border-radius:2px;
@@ -103,6 +118,7 @@ body{background-color: #ebf5bd;}
 /* النصوص على الصورة */
 .text-on-hero{
   text-align:center;
+  size: 10px;
   margin-top:10px;
   opacity:0;
   animation:fadeInText 1s forwards 1s;
@@ -112,7 +128,7 @@ body{background-color: #ebf5bd;}
   font-family:'Lateef', cursive;
   font-size:24px;
   color:#8f0404;
-  margin-bottom:10px;
+  margin-bottom:50px;
 }
 @keyframes fadeInText{to{opacity:1;}}
 
@@ -129,7 +145,7 @@ body{background-color: #ebf5bd;}
   height: 100px;
   margin: 0 auto 20px;
   position: relative;
-  filter: sepia(100) saturate(25) hue-rotate(10deg) brightness(1.2) contrast(1);
+  filter: sepia(100) saturate(27) hue-rotate(19deg) brightness(1.2) contrast(1);
 }
 .rings::after {
   content: "";
@@ -316,10 +332,7 @@ button{padding:12px;border-radius:8px;border:none;cursor:pointer;font-size:16px;
 <div class="hero">
   <div class="overlay">
     <h1 class="names lang-text" data-ar="فارس 🕊️ العنود" data-en="Fares 🕊️ Alnoud">فارس 🕊️ العنود</h1>
-    <div class="info-row">
-      <div class="date lang-text" data-ar="29 مايو, 2026" data-en="May 29, 2026">29 مايو, 2026</div>
-      <div class="subtitle lang-text" data-ar="انضموا الينا في يوم زفافنا" data-en="Join us on our wedding day">انضموا الينا في يوم زفافنا</div>
-    </div>
+    
     <div class="text-on-hero">
       <b class="lang-text" data-ar="دعوة زفاف" data-en="Wedding Invitation">دعوة زفاف</b>
       <b class="lang-text" data-ar="ندعوكم لمشاركتنا اجمل لحظات العمر" data-en="Join us to share the happiest moments">ندعوكم لمشاركتنا اجمل لحظات العمر</b>
@@ -333,10 +346,13 @@ button{padding:12px;border-radius:8px;border:none;cursor:pointer;font-size:16px;
 
 <!-- CARD -->
 <div class="card">
+<div class="info-row">
+      <div class="subtitle lang-text" data-ar="انضموا الينا في يوم زفافنا" data-en="Join us on our wedding day">انضموا الينا في يوم زفافنا</div>
+      <div class="date lang-text" data-ar="29 مايو, 2026" data-en="May 29, 2026">29 .05 .2026</div>
+    </div>
   <img src="rings (2).jpeg" class="rings">
   <div class="time lang-text" data-ar="الجمعه 8:00 مساء" data-en="Friday 8:00 PM">الجمعه 8:00 مساء</div>
   <div class="place lang-text" data-ar="Jasmine Hall" data-en="Jasmine Hall">Jasmine Hall</div>
-  <div class="note-children lang-text" data-ar="⚠️ ادارة المزرعه : منعاً للاحراج، يرجى عدم اصطحاب الاطفال" data-en="⚠️ Management: Please do not bring children">⚠️ ادارة المزرعه : منعاً للاحراج، يرجى عدم اصطحاب الاطفال</div>
   <div class="map-title lang-text" data-ar="عرض الموقع" data-en="Location">عرض الموقع</div>
   <div class="map">
     <iframe src="https://www.google.com/maps?q=Jasmine+Hall+Airport+Road+Amman&output=embed"></iframe>
@@ -361,16 +377,44 @@ button{padding:12px;border-radius:8px;border:none;cursor:pointer;font-size:16px;
   <h3 class="lang-text" data-ar="يرجى الرد قبل 26.5.2026" data-en="Please respond before 26.5.2026">يرجى الرد قبل 26.5.2026</h3>
   <form id="rsvpForm">
     <!-- حقل الاسم -->
-    <input type="text" id="name" placeholder="الاسم" class="lang-text" data-ar="الاسم" data-en="Name" required>
+     <br>
+    <input type="text" id="name" placeholder=" يرجى كتابة الاسم" class="lang-text" data-ar="يرجى كتابة الاسم" data-en="Name" required>
 
-    <!-- عدد الضيوف ثابت على 2 -->
-    <input type="text" id="guests" value="4 اشخاص" readonly>
+    <!-- عدد الضيوف ثابت على 2
+<br><div style="color: #7f8b46;text-align:right">:عدد الضيوف </div> -->
+<div style="display:flex; align-items:center; justify-content:flex-end; gap:px; color:#7f8b46; margin-top:10px;">
+<div style="display:flex; align-items:center; justify-content:flex-end; gap:10px; color:#7f8b46; margin-top:10px; flex-wrap:wrap;">
+  
 
+  
+  <input 
+    type="text" 
+    id="guests" 
+    name="guests" 
+    value="4 اشخاص" 
+    readonly
+    style="
+      min-width:140px;
+      width:180px;
+      max-width:100%;
+      text-align:center;
+      padding:8px;
+      border-radius:8px;
+      border:1px solid #ccc;
+      font-size:25px;
+    "
+  >
+  
+  <span>: عدد المدعوين</span>
+  
+</div></div>
     <!-- أزرار RSVP -->
     <div style="display:flex; gap:10px;">
       <button type="button" id="btnNo" class="lang-text" data-ar="آسف/ة بعتذر عن الحضور 😔" data-en="Sorry, I cannot attend 😔">آسف/ة بعتذر عن الحضور 😔</button>
       <button type="button" id="btnYes" class="lang-text" data-ar="أكيد راح أكون موجود/ة" data-en="Yes, I will attend">أكيد راح أكون موجود/ة</button>
     </div>
+  <div class="note-children lang-text" data-ar="⚠️ ادارة المزرعه : منعاً للاحراج، يرجى عدم اصطحاب الاطفال" data-en="⚠️ Management: Please do not bring children">⚠️ ادارة المزرعه : منعاً للاحراج، يرجى عدم اصطحاب الاطفال</div>
+
   </form>
 </section>
 
